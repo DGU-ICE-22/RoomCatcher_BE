@@ -3,8 +3,7 @@
 ## ✏️ Backend Convention
 
 ### 브랜치 컨벤션
-- `main` : 최종
-- `develop` : default 브랜치
+- `main` : default 브랜치
   
 - `기능을 개발하면서 각자가 사용할 브랜치`
   - `[feat]` : 기능 추가
