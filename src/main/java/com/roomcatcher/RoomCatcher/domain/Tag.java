@@ -22,7 +22,7 @@ public class Tag {
     private String tagName;
 
     @OneToMany(mappedBy = "tag")
-    private List<UserTag> userTags;
+    private List<UserTag> userTags = new ArrayList<>();
 
     @OneToMany(mappedBy = "tag")
     private List<ProductTag> productTags = new ArrayList<>();
