@@ -22,7 +22,10 @@ public class Product {
     private String productName;
 
     @Column(nullable = false)
-    private String productType;
+    private String productRoomType;
+
+    @Column(nullable = false)
+    private String productSellingType;
 
     @Column(nullable = false)
     private String productPrice;
@@ -32,9 +35,18 @@ public class Product {
 
     private String productInfo;
 
+    @Column(nullable = false)
+    private String productImage;
+
+    @Column(nullable = false)
+    private Boolean productIsContract;
+
+    @Column(nullable = false)
+    private Boolean productIsQuick;
+
     @OneToMany(mappedBy = "product")
     private List<UserProduct> userProducts = new ArrayList<>();
 
-    @OneToMany(mappedBy = "product")
+    @OneToMany(mappedBy = "product",cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ProductTag> productTags = new ArrayList<>();
 }

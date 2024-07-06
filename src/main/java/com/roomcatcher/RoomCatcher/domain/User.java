@@ -33,10 +33,10 @@ public class User {
     @Column(nullable = false)
     private String userImage;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<UserProduct> userProducts = new ArrayList<>();
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<UserTag> userTags = new ArrayList<>();
 
     @ManyToOne(fetch = FetchType.LAZY)
