@@ -47,6 +47,6 @@ public class Product {
     @OneToMany(mappedBy = "product")
     private List<UserProduct> userProducts = new ArrayList<>();
 
-    @OneToMany(mappedBy = "product")
+    @OneToMany(mappedBy = "product",cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ProductTag> productTags = new ArrayList<>();
 }
