@@ -2,10 +2,13 @@ package com.roomcatcher.RoomCatcher.service;
 
 import com.roomcatcher.RoomCatcher.domain.User;
 import com.roomcatcher.RoomCatcher.dto.request.UserCreateRequest;
+import com.roomcatcher.RoomCatcher.dto.request.UserLoginRequest;
 import com.roomcatcher.RoomCatcher.dto.response.UserCreateResponse;
 import com.roomcatcher.RoomCatcher.dto.response.UserLoginResponse;
 import com.roomcatcher.RoomCatcher.global.exception.BusinessException;
 import com.roomcatcher.RoomCatcher.global.exception.message.ErrorMessage;
+import com.roomcatcher.RoomCatcher.global.jwt.JwtTokenProvider;
+import com.roomcatcher.RoomCatcher.global.jwt.UserAuthentication;
 import com.roomcatcher.RoomCatcher.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -20,6 +23,8 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+    private final JwtTokenProvider jwtTokenProvider;
+
     @Transactional
     public UserCreateResponse signUp(UserCreateRequest userCreateRequest) {
 
@@ -42,5 +47,22 @@ public class UserService {
         return UserCreateResponse.of(userRepository.save(user).getId());
     }
 
+    @Transactional(readOnly = true)
+    public UserLoginResponse signIn(UserLoginRequest userLoginRequest) {
+        // 이메일로 멤버 찾기
+        User user = userRepository.findByEmailOrElseThrow(userLoginRequest.getEmail());
+
+        // 비밀번호 검증
+        if (!passwordEncoder.matches(userLoginRequest.getPassword(), user.getPassword())) {
+            throw new BusinessException(ErrorMessage.INVALID_PASSWORD);
+        }
+
+        /// AccessToken 발행
+        String accessToken = jwtTokenProvider.issueAccessToken(
+            UserAuthentication.createUserAuthentication(user.getId())
+        );
+
+        return UserLoginResponse.of(accessToken, String.valueOf(user.getId()));
+    }
 }
 
