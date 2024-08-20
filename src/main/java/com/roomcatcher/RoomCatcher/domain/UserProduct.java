@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Getter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor
 public class UserProduct {
 
     @Id
@@ -22,4 +22,10 @@ public class UserProduct {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "productId")
     private Product product;
+
+    public UserProduct(User user, Product product) {
+        this.user = user;
+        this.product = product;
+    }
+
 }
