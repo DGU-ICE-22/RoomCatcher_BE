@@ -3,6 +3,9 @@ package com.roomcatcher.RoomCatcher.service;
 import com.roomcatcher.RoomCatcher.domain.User;
 import com.roomcatcher.RoomCatcher.dto.request.UserCreateRequest;
 import com.roomcatcher.RoomCatcher.dto.response.UserCreateResponse;
+import com.roomcatcher.RoomCatcher.dto.response.UserLoginResponse;
+import com.roomcatcher.RoomCatcher.global.exception.BusinessException;
+import com.roomcatcher.RoomCatcher.global.exception.message.ErrorMessage;
 import com.roomcatcher.RoomCatcher.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -20,6 +23,12 @@ public class UserService {
     @Transactional
     public UserCreateResponse signUp(UserCreateRequest userCreateRequest) {
 
+        // 이메일 중복 체크
+        if (userRepository.findByEmail(userCreateRequest.getEmail()).isPresent()) {
+            throw new BusinessException(ErrorMessage.DUPLICATE_EMAIL);
+        }
+
+        // 유저 생성
         User user = User.builder()
                         .userName(userCreateRequest.getName())
                         .userBirth(userCreateRequest.getBirth())
