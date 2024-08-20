@@ -3,8 +3,8 @@ package com.roomcatcher.RoomCatcher.service;
 import com.roomcatcher.RoomCatcher.domain.User;
 import com.roomcatcher.RoomCatcher.dto.request.UserCreateRequest;
 import com.roomcatcher.RoomCatcher.dto.request.UserLoginRequest;
-import com.roomcatcher.RoomCatcher.dto.response.UserCreateResponse;
 import com.roomcatcher.RoomCatcher.dto.response.UserLoginResponse;
+import com.roomcatcher.RoomCatcher.dto.response.UserResponse;
 import com.roomcatcher.RoomCatcher.global.exception.BusinessException;
 import com.roomcatcher.RoomCatcher.global.exception.message.ErrorMessage;
 import com.roomcatcher.RoomCatcher.global.jwt.JwtTokenProvider;
@@ -26,7 +26,7 @@ public class UserService {
     private final JwtTokenProvider jwtTokenProvider;
 
     @Transactional
-    public UserCreateResponse signUp(UserCreateRequest userCreateRequest) {
+    public UserResponse signUp(UserCreateRequest userCreateRequest) {
 
         // 이메일 중복 체크
         if (userRepository.findByEmail(userCreateRequest.getEmail()).isPresent()) {
@@ -44,7 +44,7 @@ public class UserService {
                         .userType(null)
                         .build();
 
-        return UserCreateResponse.of(userRepository.save(user).getId());
+        return UserResponse.of(userRepository.save(user).getId());
     }
 
     @Transactional(readOnly = true)

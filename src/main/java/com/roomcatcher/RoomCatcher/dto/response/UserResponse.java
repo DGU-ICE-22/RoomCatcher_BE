@@ -9,10 +9,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class UserCreateResponse {
+public class UserResponse {
     private Long userId;
 
-    public static UserCreateResponse of(Long memberId) {
-        return new UserCreateResponse(memberId);
+    public static UserResponse of(Long memberId) {
+        return new UserResponse(memberId);
     }
 }
