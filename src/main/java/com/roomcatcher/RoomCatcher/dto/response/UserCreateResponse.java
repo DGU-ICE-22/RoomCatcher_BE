@@ -10,9 +10,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class UserCreateResponse {
-    private Long memberId;
+    private Long userId;
 
-    // memberId를 받아서 UserCreateResponse 객체를 반환하는 정적 메서드
     public static UserCreateResponse of(Long memberId) {
         return new UserCreateResponse(memberId);
     }
