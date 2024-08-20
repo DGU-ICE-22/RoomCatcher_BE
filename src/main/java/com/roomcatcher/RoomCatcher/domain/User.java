@@ -2,6 +2,7 @@ package com.roomcatcher.RoomCatcher.domain;
 
 import jakarta.persistence.*;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -11,6 +12,7 @@ import java.util.List;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Table(name = "users")
 public class User {
 
     @Id
@@ -22,15 +24,18 @@ public class User {
     private String userName;
 
     @Column(nullable = false)
+    private String userBirth;
+
+    @Column(nullable = false)
+    private String email;
+
+    @Column(nullable = false)
+    private String password;
+
+    @Column
     private String userSex;
 
-    @Column(nullable = false)
-    private String userLocation;
-
-    @Column(nullable = false)
-    private Integer userAge;
-
-    @Column(nullable = false)
+    @Column
     private String userImage;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -42,4 +47,19 @@ public class User {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "userTypeId")
     private UserType userType;
+
+    @Builder
+    public User(String userName, String userBirth, String email, String password, String userSex, String userImage, UserType userType) {
+        this.userName = userName;
+        this.userBirth = userBirth;
+        this.email = email;
+        this.password = password;
+        this.userSex = userSex;
+        this.userImage = userImage;
+        this.userType = userType;
+    }
+
+    public static User of(String userName, String userBirth, String email, String password, String userSex, String userImage, UserType userType) {
+        return new User(userName, userBirth, email, password, userSex, userImage, userType);
+    }
 }
