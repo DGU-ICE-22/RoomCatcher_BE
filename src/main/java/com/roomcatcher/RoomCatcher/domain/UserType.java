@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,9 +28,13 @@ public class UserType {
     @Column(nullable = false)
     private String typeImage;
 
-    @OneToMany(mappedBy = "userType")
-    private List<User> users = new ArrayList<>();
+    @ManyToOne
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JoinColumn(name = "userId")
+    private User users;
 
-    @OneToMany(mappedBy = "userType")
-    private List<UserTypeTag> userTypeTags = new ArrayList<>();
+    @ManyToOne
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JoinColumn(name = "typeId")
+    private Type type;
 }

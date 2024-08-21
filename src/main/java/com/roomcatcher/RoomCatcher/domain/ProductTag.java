@@ -4,10 +4,14 @@ import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Table(name = "dataAnalyze_productTag_detail", schema = "RoomCatcherDB")
+
 public class ProductTag {
 
     @Id
@@ -16,10 +20,15 @@ public class ProductTag {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "productId")
     private Product product;
 
+    @Column(name = "listing_serial_number")
+    private Long listingSerialNumber;
+
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "tagId")
-    private Tag tag;
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JoinColumn(name = "tagId_id")          //나중에 테이블에서 tagId로 바꾸기
+    private Tag tagId;
 }

@@ -11,6 +11,7 @@ import java.util.List;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Table(name = "dataAnalyze_tag_detail", schema = "RoomCatcherDB")
 public class Tag {
 
     @Id
@@ -21,12 +22,13 @@ public class Tag {
     @Column(nullable = false)
     private String tagName;
 
+    @Lob
+    private byte[] embedding;
+
     @OneToMany(mappedBy = "tag")
     private List<UserTag> userTags = new ArrayList<>();
 
     @OneToMany(mappedBy = "tag")
     private List<ProductTag> productTags = new ArrayList<>();
 
-    @OneToMany(mappedBy = "tag")
-    private List<UserTypeTag> userTypeTags = new ArrayList<>();
 }
