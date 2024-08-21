@@ -27,4 +27,8 @@ public class UserProduct {
     @JoinColumn(name = "productId")
     private Product product;
 
+    public UserProduct(User user, Product product) {
+        this.user = user;
+        this.product = product;
+    }
 }
