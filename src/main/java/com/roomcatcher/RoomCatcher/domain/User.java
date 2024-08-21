@@ -18,7 +18,7 @@ public class User {
     @Id
     @Column(name = "userId")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long Id;
+    private Long id;
 
     @Column(nullable = false)
     private String userName;
@@ -48,6 +48,9 @@ public class User {
     @JoinColumn(name = "userTypeId")
     private UserType userType;
 
+    @Column
+    private String currentToken;
+
     @Builder
     public User(String userName, String userBirth, String email, String password, String userSex, String userImage, UserType userType) {
         this.userName = userName;
@@ -61,5 +64,13 @@ public class User {
 
     public static User of(String userName, String userBirth, String email, String password, String userSex, String userImage, UserType userType) {
         return new User(userName, userBirth, email, password, userSex, userImage, userType);
+    }
+
+    public String getCurrentToken() {
+        return currentToken;
+    }
+
+    public void setCurrentToken(String currentToken) {
+        this.currentToken = currentToken;
     }
 }

@@ -12,10 +12,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api")
@@ -34,5 +31,12 @@ public class UserController {
     @PostMapping("/login")
     public ResponseEntity<SuccessStatusResponse<UserLoginResponse>> signIn(@Valid @RequestBody UserLoginRequest userLoginRequest) {
         return ResponseEntity.status(HttpStatus.CREATED).body(SuccessStatusResponse.of(SuccessMessage.SIGNIN_SUCCESS, userService.signIn(userLoginRequest)));
+    }
+
+    // 로그아웃
+    @PostMapping("/logout")
+    public ResponseEntity<SuccessStatusResponse<UserResponse>> logout(@RequestHeader("Authorization") String token) {
+        userService.logout(token);
+        return ResponseEntity.status(HttpStatus.OK).body(SuccessStatusResponse.of(SuccessMessage.LOGOUT_SUCCESS, null));
     }
 }
