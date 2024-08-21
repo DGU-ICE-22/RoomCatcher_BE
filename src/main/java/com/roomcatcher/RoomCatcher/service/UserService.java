@@ -17,6 +17,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Slf4j // 다양한 로깅 프레임워크(예: Logback, Log4j, JUL)를 사용할 수 있게하는 어노테이션
 @Service
 @RequiredArgsConstructor
@@ -25,6 +28,9 @@ public class UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtTokenProvider jwtTokenProvider;
+
+    // 로그아웃된 토큰을 저장하는 블랙리스트
+    private final Set<String> tokenBlacklist = new HashSet<>();
 
     @Transactional
     public UserResponse signUp(UserCreateRequest userCreateRequest) {
@@ -63,40 +69,50 @@ public class UserService {
             UserAuthentication.createUserAuthentication(user.getId())
         );
 
-        // 현재 토큰을 db에 저장
-        user.setCurrentToken(accessToken);
-        userRepository.save(user);
-
         return UserLoginResponse.of(accessToken, String.valueOf(user.getId()));
     }
 
     @Transactional
     public UserResponse logout(String token) {
-
-        User user = validateTokenAndGetUser(token);
-
-        // 현재 가지고 있는 토큰과 요청으로 들어온 토큰이 일치하는지 확인
-        if (!token.equals(user.getCurrentToken())) {
-            throw new BusinessException(ErrorMessage.INVALID_JWT_TOKEN);
+        // 이미 로그아웃된 토큰인지 확인
+        if (tokenBlacklist.contains(token)) {
+            throw new BusinessException(ErrorMessage.ALREADY_LOGOUT_TOKEN);
         }
 
-        // 현재 가지고 있는 유효한 토큰을 무효화
-        user.setCurrentToken(null);
-        userRepository.save(user);
-
-        return UserResponse.of(user.getId());
-    }
-
-    // 토큰이 유효한지와 사용자 정보를 추출하는 메서드
-    private User validateTokenAndGetUser(String token) {
+        // 토큰 유효성 검사
         if (jwtTokenProvider.validateToken(token) != JwtValidationType.VALID_JWT) {
             throw new BusinessException(ErrorMessage.INVALID_JWT_TOKEN);
         }
 
-        // 토큰에서 사용자 정보 추출
-        Long userId = jwtTokenProvider.getUserFromJwt(token);
-        return userRepository.findById(userId)
-                   .orElseThrow(() -> new BusinessException(ErrorMessage.NOT_FOUND_USER));
+        // 사용자 존재 여부 확인 -> 즉 이미 회원탈퇴를 했는지
+        User user = userRepository.findById(jwtTokenProvider.getUserFromJwt(token)).orElseThrow(() -> {
+            throw new BusinessException(ErrorMessage.DEACTIVATED_ACCOUNT);
+        });
+
+        // 블랙리스트에 토큰 추가
+        tokenBlacklist.add(token);
+
+        return UserResponse.of(user.getId());
+    }
+
+    @Transactional
+    public void deleteAccount(String token) {
+        // 블랙리스트에 있는 토큰인지 확인
+        if (tokenBlacklist.contains(token)) {
+            throw new BusinessException(ErrorMessage.INVALID_JWT_TOKEN); // 이미 로그아웃된 토큰이므로 탈퇴를 진행하지 않음
+        }
+
+        // 토큰 유효성 검사
+        if (jwtTokenProvider.validateToken(token) != JwtValidationType.VALID_JWT) {
+            throw new BusinessException(ErrorMessage.INVALID_JWT_TOKEN);
+        }
+
+        // 사용자 정보 확인 및 계정 삭제
+        User user = userRepository.findById(jwtTokenProvider.getUserFromJwt(token))
+                        .orElseThrow(() -> new BusinessException(ErrorMessage.NOT_FOUND_USER));
+
+        // 사용자 삭제
+        userRepository.delete(user);
     }
 }
 

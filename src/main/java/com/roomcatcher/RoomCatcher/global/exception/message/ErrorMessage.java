@@ -12,7 +12,9 @@ public enum ErrorMessage {
     DUPLICATE_EMAIL(HttpStatus.CONFLICT.value(), "이미 가입한 사용자 입니다."),
     INVALID_PASSWORD(HttpStatus.BAD_REQUEST.value(), "비밀번호가 일치하지 않습니다."),
     JWT_UNAUTHORIZED_EXCEPTION(HttpStatus.UNAUTHORIZED.value(), "사용자의 로그인 검증을 실패했습니다."),
-    INVALID_JWT_TOKEN(HttpStatus.UNAUTHORIZED.value(), "유효하지 않은 accessToken입니다.")
+    INVALID_JWT_TOKEN(HttpStatus.UNAUTHORIZED.value(), "유효하지 않은 accessToken입니다."),
+    ALREADY_LOGOUT_TOKEN(HttpStatus.UNAUTHORIZED.value(), "이미 로그아웃된 토큰입니다."),
+    DEACTIVATED_ACCOUNT(HttpStatus.FORBIDDEN.value(), "탈퇴된 계정입니다.")
     ;
 
     private final int code;

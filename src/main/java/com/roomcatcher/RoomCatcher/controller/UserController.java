@@ -36,7 +36,13 @@ public class UserController {
     // 로그아웃
     @PostMapping("/logout")
     public ResponseEntity<SuccessStatusResponse<UserResponse>> logout(@RequestHeader("Authorization") String token) {
-        userService.logout(token);
-        return ResponseEntity.status(HttpStatus.OK).body(SuccessStatusResponse.of(SuccessMessage.LOGOUT_SUCCESS, null));
+        return ResponseEntity.status(HttpStatus.OK).body(SuccessStatusResponse.of(SuccessMessage.LOGOUT_SUCCESS, userService.logout(token)));
+    }
+
+    // 회원탈퇴
+    @DeleteMapping("/users/delete")
+    public ResponseEntity<SuccessStatusResponse<Void>> deleteAccount(@RequestHeader("Authorization") String token) {
+        userService.deleteAccount(token);
+        return ResponseEntity.status(HttpStatus.OK).body(SuccessStatusResponse.of(SuccessMessage.ACCOUNT_DELETION_SUCCESS, null));
     }
 }
