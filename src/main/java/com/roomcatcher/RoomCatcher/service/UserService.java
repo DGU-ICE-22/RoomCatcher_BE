@@ -46,7 +46,7 @@ public class UserService {
                         .userBirth(userCreateRequest.getBirth())
                         .email(userCreateRequest.getEmail())
                         .password(passwordEncoder.encode(userCreateRequest.getPassword())) // 비밀번호를 암호화하여 저장
-                        .userSex(null)
+                        .userSex(userCreateRequest.getSex())
                         .userImage(null)
                         .userType(null)
                         .build();

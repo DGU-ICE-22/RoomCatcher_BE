@@ -1,6 +1,7 @@
 package com.roomcatcher.RoomCatcher.dto.request;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -24,4 +25,7 @@ public class UserCreateRequest {
 
     @NotBlank(message = "생년월일을 입력해야 합니다.")
     private String birth;
+
+    @NotNull(message = "성별을 입력해야 합니다.")
+    private Integer sex;
 }
