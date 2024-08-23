@@ -4,13 +4,14 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.sql.Blob;
 import java.util.ArrayList;
 import java.util.List;
 
 @Getter
 @NoArgsConstructor
 @Entity
-@Table(name = "report_and_recommand_user_type", schema = "RoomCatcherDB")
+@Table(name = "`report_and_recommand_user_type`", schema = "RoomCatcherDB")
 public class Type {
 
     @Id
@@ -26,7 +27,7 @@ public class Type {
 
     @Column(name = "embedding")
     @Lob
-    private byte[] embedding;
+    private Blob embedding;
 
     @Column(name = "typeImage")
     @Transient

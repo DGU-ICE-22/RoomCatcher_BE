@@ -13,6 +13,7 @@ import java.util.List;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Table(name = "`user_type`", schema = "RoomCatcherDB")
 public class UserType {
 
     @Id

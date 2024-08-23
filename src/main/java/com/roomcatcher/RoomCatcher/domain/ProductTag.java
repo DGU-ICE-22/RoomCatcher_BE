@@ -10,10 +10,8 @@ import org.hibernate.annotations.OnDeleteAction;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Table(name = "dataAnalyze_productTag_detail", schema = "RoomCatcherDB")
-
+@Table(name = "`data_analyze_product_tag_detail`", schema = "RoomCatcherDB")
 public class ProductTag {
-
     @Id
     @Column(name = "productTagId")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,5 +28,5 @@ public class ProductTag {
     @ManyToOne(fetch = FetchType.LAZY)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "tagId_id")          //나중에 테이블에서 tagId로 바꾸기
-    private Tag tagId;
+    private Tag tag;
 }

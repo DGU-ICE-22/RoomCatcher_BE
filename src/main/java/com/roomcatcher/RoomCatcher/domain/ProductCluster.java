@@ -7,7 +7,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name = "dataAnalyze_ProductKB", schema = "RoomCatcherDB")
+@Table(name = "`data_analyze_product_kb`", schema = "RoomCatcherDB")
 public class ProductCluster {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -5,13 +5,14 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.sql.Blob;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Table(name = "dataAnalyze_tag_detail", schema = "RoomCatcherDB")
+@Table(name = "`data_analyze_tag_detail`", schema = "RoomCatcherDB")
 public class Tag {
 
     @Id
@@ -23,7 +24,7 @@ public class Tag {
     private String tagName;
 
     @Lob
-    private byte[] embedding;
+    private Blob embedding;
 
     @OneToMany(mappedBy = "tag")
     private List<UserTag> userTags = new ArrayList<>();

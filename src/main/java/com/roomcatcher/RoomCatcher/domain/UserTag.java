@@ -10,6 +10,7 @@ import org.hibernate.annotations.OnDeleteAction;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Table(name = "`user_tag`", schema = "RoomCatcherDB")
 public class UserTag {
 
     @Id

@@ -10,7 +10,7 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
-@Table(name = "dataAnalyze_ProductKB_detail", schema = "RoomCatcherDB")
+@Table(name = "`data_analyze_product_kb_detail`", schema = "RoomCatcherDB")
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
