@@ -10,6 +10,7 @@ import org.hibernate.annotations.OnDeleteAction;
 @Entity
 @Getter
 @NoArgsConstructor
+@Table(name = "`user_product`", schema = "RoomCatcherDB")
 public class UserProduct {
 
     @Id
