@@ -1,7 +1,5 @@
 package com.roomcatcher.RoomCatcher.controller;
 
-import com.roomcatcher.RoomCatcher.dto.userproduct.request.CreateUserProductDTO;
-import com.roomcatcher.RoomCatcher.dto.userproduct.request.DeleteUserProductDTO;
 import com.roomcatcher.RoomCatcher.service.userproduct.UserProductService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
