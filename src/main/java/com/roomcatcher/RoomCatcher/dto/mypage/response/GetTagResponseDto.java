@@ -1,4 +1,4 @@
-package com.roomcatcher.RoomCatcher.dto.mypage;
+package com.roomcatcher.RoomCatcher.dto.mypage.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

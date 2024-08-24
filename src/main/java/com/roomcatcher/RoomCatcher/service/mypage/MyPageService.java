@@ -1,7 +1,15 @@
 package com.roomcatcher.RoomCatcher.service.mypage;
 
-import com.roomcatcher.RoomCatcher.dto.mypage.GetTagResponseDto;
+import com.roomcatcher.RoomCatcher.domain.Tag;
+import com.roomcatcher.RoomCatcher.domain.UserTag;
+import com.roomcatcher.RoomCatcher.dto.mypage.request.UserTagRequestDto;
+import com.roomcatcher.RoomCatcher.dto.mypage.response.GetTagResponseDto;
+import com.roomcatcher.RoomCatcher.dto.mypage.response.UserTagResponseDto;
+import com.roomcatcher.RoomCatcher.global.jwt.JwtTokenProvider;
 import com.roomcatcher.RoomCatcher.repository.TagRepository;
+import com.roomcatcher.RoomCatcher.repository.UserRepository;
+import com.roomcatcher.RoomCatcher.repository.UserTagRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +22,12 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class MyPageService {
 
+    private final UserTagRepository userTagRepository;
     private final TagRepository tagRepository;
+    private final UserRepository userRepository;
+    private final JwtTokenProvider jwtTokenProvider;
+
+    // 해시태그 목록 조회
     public GetTagResponseDto getTags() {
         List<String> tagNames = tagRepository.findAll().stream()
                                     .map(tag -> tag.getTagName())
@@ -61,6 +74,29 @@ public class MyPageService {
         Collator collator = Collator.getInstance(Locale.KOREAN);
         collator.setStrength(Collator.PRIMARY);
         return collator;
+    }
+
+    // 사용자의 선호정보 업데이트
+    @Transactional
+    public UserTagResponseDto updateUserTags(String token, UserTagRequestDto requestDto) {
+        // 사용자의 기존 태그 삭제
+        userTagRepository.deleteByUser(userRepository.findByToken(token, jwtTokenProvider));
+
+        // 새로운 태그 저장
+        List<Tag> tags = tagRepository.findByTagNameIn(requestDto.getTagNames());
+
+        List<UserTag> userTags = tags.stream()
+                                     .map(tag -> new UserTag(userRepository.findByToken(token, jwtTokenProvider), tag))
+                                     .collect(Collectors.toList());
+
+        userTagRepository.saveAll(userTags);
+
+        // 태그 목록 반환
+        List<String> UserTags = userTags.stream()
+                                        .map(userTag -> userTag.getTag().getTagName())
+                                        .collect(Collectors.toList());
+
+        return new UserTagResponseDto(UserTags);
     }
 }
 
