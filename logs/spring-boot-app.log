@@ -1,0 +1,92 @@
+2024-08-24 04:51:42 INFO  c.r.R.RoomCatcherApplication - Starting RoomCatcherApplication using Java 21.0.3 with PID 73097 (/Users/5hseok/IdeaProjects/RoomCatcher_BE/build/classes/java/main started by sam in /Users/5hseok/IdeaProjects/RoomCatcher_BE)
+2024-08-24 04:51:42 DEBUG c.r.R.RoomCatcherApplication - Running with Spring Boot v3.2.4, Spring v6.1.5
+2024-08-24 04:51:42 INFO  c.r.R.RoomCatcherApplication - No active profile set, falling back to 1 default profile: "default"
+2024-08-24 04:51:42 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2024-08-24 04:51:42 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2024-08-24 04:51:42 INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.roomcatcher.RoomCatcher.repository.ProductRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2024-08-24 04:51:42 INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.roomcatcher.RoomCatcher.repository.UserProductRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2024-08-24 04:51:42 INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.roomcatcher.RoomCatcher.repository.UserRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2024-08-24 04:51:42 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 9 ms. Found 0 JDBC repository interfaces.
+2024-08-24 04:51:42 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2024-08-24 04:51:42 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-08-24 04:51:42 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 6 ms. Found 3 JPA repository interfaces.
+2024-08-24 04:51:42 WARN  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.ws.config.annotation.DelegatingWsConfiguration' of type [org.springframework.ws.config.annotation.DelegatingWsConfiguration$$SpringCGLIB$$0] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). The currently created BeanPostProcessor [annotationActionEndpointMapping] is declared through a non-static factory method on that class; consider declaring it as static instead.
+2024-08-24 04:51:42 INFO  o.s.w.s.a.s.AnnotationActionEndpointMapping - Supporting [WS-Addressing August 2004, WS-Addressing 1.0]
+2024-08-24 04:51:42 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2024-08-24 04:51:42 INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2024-08-24 04:51:43 INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2024-08-24 04:51:43 INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.19]
+2024-08-24 04:51:43 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2024-08-24 04:51:43 INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 431 ms
+2024-08-24 04:51:43 INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-08-24 04:51:43 INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.4.4.Final
+2024-08-24 04:51:43 INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2024-08-24 04:51:43 INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-08-24 04:51:43 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2024-08-24 04:51:43 INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@416c8bb5
+2024-08-24 04:51:43 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2024-08-24 04:51:43 INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-08-24 04:51:43 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-08-24 04:51:43 WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-08-24 04:51:44 WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
+
+Using generated security password: dd213762-dc22-482a-9d0a-adf4dfc6c262
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2024-08-24 04:51:44 INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@70ca533a, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@6945fdb8, org.springframework.security.web.context.SecurityContextHolderFilter@64aab3fd, org.springframework.security.web.header.HeaderWriterFilter@4a0161ee, org.springframework.web.filter.CorsFilter@627dfd9f, org.springframework.security.web.csrf.CsrfFilter@111ae918, org.springframework.security.web.authentication.logout.LogoutFilter@3741a170, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@22277482, org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter@7ce58c1c, org.springframework.security.web.authentication.ui.DefaultLogoutPageGeneratingFilter@35e64c7b, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@23674e3d, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@34c79268, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@5fe80760, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@17179a7e, org.springframework.security.web.access.ExceptionTranslationFilter@70d61624, org.springframework.security.web.access.intercept.AuthorizationFilter@f61b92d]
+2024-08-24 04:51:44 INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2024-08-24 04:51:44 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path ''
+2024-08-24 04:51:44 INFO  c.r.R.RoomCatcherApplication - Started RoomCatcherApplication in 1.739 seconds (process running for 1.996)
+2024-08-24 04:51:56 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-08-24 04:51:56 INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2024-08-24 04:51:56 INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2024-08-24 04:52:16 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-08-24 04:52:16 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2024-08-24 04:52:16 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2024-08-24 04:52:17 INFO  c.r.R.RoomCatcherApplication - Starting RoomCatcherApplication using Java 21.0.3 with PID 73112 (/Users/5hseok/IdeaProjects/RoomCatcher_BE/build/classes/java/main started by sam in /Users/5hseok/IdeaProjects/RoomCatcher_BE)
+2024-08-24 04:52:17 DEBUG c.r.R.RoomCatcherApplication - Running with Spring Boot v3.2.4, Spring v6.1.5
+2024-08-24 04:52:17 INFO  c.r.R.RoomCatcherApplication - No active profile set, falling back to 1 default profile: "default"
+2024-08-24 04:52:17 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2024-08-24 04:52:17 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2024-08-24 04:52:17 INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.roomcatcher.RoomCatcher.repository.ProductRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2024-08-24 04:52:17 INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.roomcatcher.RoomCatcher.repository.UserProductRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2024-08-24 04:52:17 INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.roomcatcher.RoomCatcher.repository.UserRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2024-08-24 04:52:17 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 9 ms. Found 0 JDBC repository interfaces.
+2024-08-24 04:52:17 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2024-08-24 04:52:17 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-08-24 04:52:17 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 7 ms. Found 3 JPA repository interfaces.
+2024-08-24 04:52:17 WARN  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.ws.config.annotation.DelegatingWsConfiguration' of type [org.springframework.ws.config.annotation.DelegatingWsConfiguration$$SpringCGLIB$$0] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). The currently created BeanPostProcessor [annotationActionEndpointMapping] is declared through a non-static factory method on that class; consider declaring it as static instead.
+2024-08-24 04:52:17 INFO  o.s.w.s.a.s.AnnotationActionEndpointMapping - Supporting [WS-Addressing August 2004, WS-Addressing 1.0]
+2024-08-24 04:52:17 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2024-08-24 04:52:17 INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2024-08-24 04:52:17 INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2024-08-24 04:52:17 INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.19]
+2024-08-24 04:52:18 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2024-08-24 04:52:18 INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 426 ms
+2024-08-24 04:52:18 INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-08-24 04:52:18 INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.4.4.Final
+2024-08-24 04:52:18 INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2024-08-24 04:52:18 INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-08-24 04:52:18 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2024-08-24 04:52:18 INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@35fb3209
+2024-08-24 04:52:18 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2024-08-24 04:52:18 INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-08-24 04:52:18 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-08-24 04:52:18 WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-08-24 04:52:19 WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
+
+Using generated security password: 8294cb31-9e44-4ed0-8da5-82430bd39dc4
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2024-08-24 04:52:19 INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@1e82b631, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@42c2a1da, org.springframework.security.web.context.SecurityContextHolderFilter@58192546, org.springframework.security.web.header.HeaderWriterFilter@70d61624, org.springframework.web.filter.CorsFilter@70ca533a, org.springframework.security.web.csrf.CsrfFilter@4dea763c, org.springframework.security.web.authentication.logout.LogoutFilter@6ca9f1d0, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@6cc9f35d, org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter@6e591c03, org.springframework.security.web.authentication.ui.DefaultLogoutPageGeneratingFilter@6945fdb8, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@309d9033, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@64aab3fd, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@2565b097, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@627dfd9f, org.springframework.security.web.access.ExceptionTranslationFilter@6b6b4177, org.springframework.security.web.access.intercept.AuthorizationFilter@9198fe3]
+2024-08-24 04:52:19 INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2024-08-24 04:52:19 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path ''
+2024-08-24 04:52:19 INFO  c.r.R.RoomCatcherApplication - Started RoomCatcherApplication in 1.702 seconds (process running for 1.953)
+2024-08-24 04:52:24 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-08-24 04:52:24 INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2024-08-24 04:52:24 INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 0 ms
+2024-08-24 04:54:31 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-08-24 04:54:31 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2024-08-24 04:54:31 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
