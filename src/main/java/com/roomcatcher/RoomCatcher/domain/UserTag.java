@@ -14,17 +14,17 @@ import org.hibernate.annotations.OnDeleteAction;
 public class UserTag {
 
     @Id
-    @Column(name = "userTagId")
+    @Column(name = "user_tag_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @JoinColumn(name = "userId")
+    @JoinColumn(name = "user_id")
     private User user;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @JoinColumn(name = "tagId")
+    @JoinColumn(name = "tag_id", referencedColumnName = "id")
     private Tag tag;
 }

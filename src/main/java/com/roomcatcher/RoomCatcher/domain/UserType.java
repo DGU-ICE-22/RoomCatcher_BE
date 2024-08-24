@@ -17,9 +17,9 @@ import java.util.List;
 public class UserType {
 
     @Id
-    @Column(name = "userTypeId")
+    @Column(name = "user_type_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long Id;
+    private Long id;
 
     @Column(nullable = false)
     private String typeName;
@@ -31,11 +31,11 @@ public class UserType {
 
     @ManyToOne
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @JoinColumn(name = "userId")
+    @JoinColumn(name = "user_id")
     private User users;
 
     @ManyToOne
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @JoinColumn(name = "typeId")
+    @JoinColumn(name = "type_id", referencedColumnName = "id")
     private Type type;
 }

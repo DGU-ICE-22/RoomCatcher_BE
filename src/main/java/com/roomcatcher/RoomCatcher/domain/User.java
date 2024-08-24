@@ -15,9 +15,9 @@ import java.util.List;
 public class User {
 
     @Id
-    @Column(name = "userId")
+    @Column(name = "user_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long Id;
+    private Long id;
 
     @Column(nullable = false)
     private String userName;
@@ -41,6 +41,6 @@ public class User {
     private List<UserTag> userTags = new ArrayList<>();
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "userTypeId")
+    @JoinColumn(name = "user_type_id")
     private List<UserType> userType = new ArrayList<>();
 }

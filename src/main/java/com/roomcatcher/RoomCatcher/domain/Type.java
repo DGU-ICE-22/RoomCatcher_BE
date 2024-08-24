@@ -16,8 +16,8 @@ public class Type {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "typeId", nullable = false)
-    private Integer Id;
+    @Column(name = "id", nullable = false)
+    private Integer id;
 
     @Column(nullable = false, length = 64)
     private String typeName;

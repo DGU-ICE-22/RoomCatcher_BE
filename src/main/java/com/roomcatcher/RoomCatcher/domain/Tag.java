@@ -16,7 +16,7 @@ import java.util.List;
 public class Tag {
 
     @Id
-    @Column(name = "tagId")
+    @Column
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 

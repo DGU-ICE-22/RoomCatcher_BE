@@ -10,7 +10,7 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
-@Table(name = "`data_analyze_product_kb_detail`", schema = "RoomCatcherDB")
+@Table(name = "data_analyze_product_kb_detail", schema = "RoomCatcherDB")
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -138,11 +138,11 @@ public class Product {
     private Integer 채권금액;
 
     @Lob
-    @Column(name = "특징광고내용")
+    @Column(name = "특징광고내용", columnDefinition = "TEXT")
     private String 특징광고내용;
 
     @Lob
-    @Column(name = "물건특징내용")
+    @Column(name = "물건특징내용", columnDefinition = "TEXT")
     private String 물건특징내용;
 
     @Lob

@@ -5,9 +5,11 @@ import com.roomcatcher.RoomCatcher.domain.User;
 import com.roomcatcher.RoomCatcher.domain.UserProduct;
 import lombok.Data;
 import lombok.Getter;
+import lombok.Setter;
 
 // 맞춤 매물로 등록하기
 @Getter
+@Setter
 @Data
 public class CreateUserProductDTO {
     private Long productId;

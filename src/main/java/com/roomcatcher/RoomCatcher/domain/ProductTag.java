@@ -7,19 +7,21 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
+import java.math.BigInteger;
+
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "`data_analyze_product_tag_detail`", schema = "RoomCatcherDB")
 public class ProductTag {
     @Id
-    @Column(name = "productTagId")
+    @Column
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @JoinColumn(name = "productId")
+    @JoinColumn(name = "product_id")
     private Product product;
 
     @Column(name = "listing_serial_number")

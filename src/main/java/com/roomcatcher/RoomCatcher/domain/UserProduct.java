@@ -14,18 +14,18 @@ import org.hibernate.annotations.OnDeleteAction;
 public class UserProduct {
 
     @Id
-    @Column(name = "userProductId")
+    @Column(name = "user_product_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "userId")
+    @JoinColumn(name = "user_id")
     @OnDelete(action = OnDeleteAction.CASCADE)
     private User user;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @JoinColumn(name = "productId")
+    @JoinColumn(name = "product_id", referencedColumnName = "id")
     private Product product;
 
     public UserProduct(User user, Product product) {
