@@ -15,12 +15,12 @@ public class UserProductController {
     private final UserProductService userProductService;
 
     @PostMapping
-    public void createUserProduct(@RequestHeader String token, @RequestParam Long productId) {
+    public void createUserProduct(@RequestHeader ("Authorization") String token, @RequestParam Long productId) {
         userProductService.createUserProduct(token, productId);
     }
 
     @DeleteMapping
-    public void deleteUserProduct(@RequestHeader String token, @RequestParam Long productId) {
+    public void deleteUserProduct(@RequestHeader ("Authorization") String token, @RequestParam Long productId) {
         userProductService.deleteUserProduct(token, productId);
     }
 }
