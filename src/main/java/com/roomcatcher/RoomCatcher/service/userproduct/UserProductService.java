@@ -4,8 +4,6 @@ import ch.qos.logback.classic.Logger;
 import com.roomcatcher.RoomCatcher.domain.Product;
 import com.roomcatcher.RoomCatcher.domain.User;
 import com.roomcatcher.RoomCatcher.domain.UserProduct;
-import com.roomcatcher.RoomCatcher.dto.userproduct.request.CreateUserProductDTO;
-import com.roomcatcher.RoomCatcher.dto.userproduct.request.DeleteUserProductDTO;
 import com.roomcatcher.RoomCatcher.global.exception.BusinessException;
 import com.roomcatcher.RoomCatcher.global.exception.message.ErrorMessage;
 import com.roomcatcher.RoomCatcher.global.jwt.JwtTokenProvider;
