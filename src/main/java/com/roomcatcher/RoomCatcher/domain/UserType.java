@@ -1,9 +1,7 @@
 package com.roomcatcher.RoomCatcher.domain;
 
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -12,6 +10,8 @@ import java.util.List;
 
 @Entity
 @Getter
+@Builder
+@AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "`user_type`", schema = "RoomCatcherDB")
 public class UserType {
@@ -20,14 +20,6 @@ public class UserType {
     @Column(name = "user_type_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @Column(nullable = false)
-    private String typeName;
-
-    private String typeComment;
-
-    @Column(nullable = false)
-    private String typeImage;
 
     @ManyToOne
     @OnDelete(action = OnDeleteAction.CASCADE)
@@ -38,4 +30,6 @@ public class UserType {
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "type_id", referencedColumnName = "id")
     private Type type;
+
+
 }

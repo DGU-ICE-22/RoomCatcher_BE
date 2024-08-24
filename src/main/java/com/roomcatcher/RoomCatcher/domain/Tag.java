@@ -12,11 +12,11 @@ import java.util.List;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Table(name = "`data_analyze_tag_detail`", schema = "RoomCatcherDB")
+@Table(name = "data_analyze_tag_detail", schema = "RoomCatcherDB")
 public class Tag {
 
     @Id
-    @Column
+    @Column(name= "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
