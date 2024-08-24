@@ -21,7 +21,7 @@ public class SecurityConfig {
     private final CustomJwtAuthenticationEntryPoint customJwtAuthenticationEntryPoint;
     private final CustomAccessDeniedHandler customAccessDeniedHandler;
 
-    private static final String[] AUTH_WHITE_LIST = {"/api/register", "/api/login"}; // 화이트 리스트 경로를 추가하여 이 경로는 인증 없이 접근 가능
+    private static final String[] AUTH_WHITE_LIST = {"/api/register", "/api/login", "api/mypage/tags" }; // 화이트 리스트 경로를 추가하여 이 경로는 인증 없이 접근 가능
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
