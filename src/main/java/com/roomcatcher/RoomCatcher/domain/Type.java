@@ -19,17 +19,17 @@ public class Type {
     @Column(name = "id", nullable = false)
     private Integer id;
 
-    @Column(nullable = false, length = 64)
+    @Column(nullable = false, length = 64, name="type_name")
     private String typeName;
 
-    @Column(nullable = false, length = 1024)
+    @Column(nullable = false, length = 1024, name = "type_explain")
     private String typeExplain;
 
     @Column(name = "embedding")
     @Lob
     private Blob embedding;
 
-    @Column(name = "typeImage")
+    @Column(name = "type_image")
     @Transient
     private String typeImage;
 
