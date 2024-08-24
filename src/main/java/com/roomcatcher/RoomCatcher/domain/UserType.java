@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,12 +13,13 @@ import java.util.List;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Table(name = "`user_type`", schema = "RoomCatcherDB")
 public class UserType {
 
     @Id
-    @Column(name = "userTypeId")
+    @Column(name = "user_type_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long Id;
+    private Long id;
 
     @Column(nullable = false)
     private String typeName;
@@ -26,9 +29,13 @@ public class UserType {
     @Column(nullable = false)
     private String typeImage;
 
-    @OneToMany(mappedBy = "userType")
-    private List<User> users = new ArrayList<>();
+    @ManyToOne
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JoinColumn(name = "user_id")
+    private User users;
 
-    @OneToMany(mappedBy = "userType")
-    private List<UserTypeTag> userTypeTags = new ArrayList<>();
+    @ManyToOne
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JoinColumn(name = "type_id", referencedColumnName = "id")
+    private Type type;
 }
