@@ -3,6 +3,7 @@ package com.roomcatcher.RoomCatcher.service.mypage;
 import com.roomcatcher.RoomCatcher.domain.Tag;
 import com.roomcatcher.RoomCatcher.domain.User;
 import com.roomcatcher.RoomCatcher.domain.UserTag;
+import com.roomcatcher.RoomCatcher.dto.mypage.request.UserInfoRequestDto;
 import com.roomcatcher.RoomCatcher.dto.mypage.request.UserTagRequestDto;
 import com.roomcatcher.RoomCatcher.dto.mypage.response.GetTagResponseDto;
 import com.roomcatcher.RoomCatcher.dto.mypage.response.MypageReponseDto;
@@ -122,6 +123,16 @@ public class MyPageService {
             user.getUserlocation(),
             tagNames
         );
+    }
+
+    // 마이페이지 회원 정보 업데이트
+    @Transactional
+    public void fixMyPage(String token, UserInfoRequestDto userInfoRequestDto) {
+        User user = userRepository.findByToken(token, jwtTokenProvider);
+
+        user.updateUserInfo(userInfoRequestDto.getBirth(), userInfoRequestDto.getSex(), userInfoRequestDto.getResidence());
+
+        userRepository.save(user);
     }
 }
 

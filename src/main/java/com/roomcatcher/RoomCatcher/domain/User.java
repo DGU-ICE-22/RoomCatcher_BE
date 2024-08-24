@@ -67,4 +67,9 @@ public class User {
         return new User(userName, userBirth, email, password, userSex, userImage, userType, userLocation);
     }
 
+    public void updateUserInfo(String birth, String sex, String residence) {
+        this.userBirth = birth;
+        this.userSex = sex;
+        this.userlocation = residence;
+    }
 }

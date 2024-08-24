@@ -1,5 +1,6 @@
 package com.roomcatcher.RoomCatcher.controller;
 
+import com.roomcatcher.RoomCatcher.dto.mypage.request.UserInfoRequestDto;
 import com.roomcatcher.RoomCatcher.dto.mypage.request.UserTagRequestDto;
 import com.roomcatcher.RoomCatcher.dto.mypage.response.GetTagResponseDto;
 import com.roomcatcher.RoomCatcher.dto.mypage.response.MypageReponseDto;
@@ -28,12 +29,19 @@ public class MyPageController {
     // 사용자 선호정보(해시태그) 목록 업데이트
     @PostMapping("/userTags")
     public ResponseEntity<SuccessStatusResponse<UserTagResponseDto>> updateUserTags(@RequestHeader("Authorization") String token, @RequestBody UserTagRequestDto requestDto) {
-        return ResponseEntity.status(HttpStatus.OK).body(SuccessStatusResponse.of(SuccessMessage.TAGS_UPDATE_SUCCESS, myPageService.updateUserTags(token, requestDto)));
+        return ResponseEntity.status(HttpStatus.CREATED).body(SuccessStatusResponse.of(SuccessMessage.TAGS_UPDATE_SUCCESS, myPageService.updateUserTags(token, requestDto)));
     }
 
     // 마이페이지 조회
     @GetMapping
     public ResponseEntity<SuccessStatusResponse<MypageReponseDto>> getMyPage(@RequestHeader("Authorization") String token) {
         return ResponseEntity.status(HttpStatus.OK).body(SuccessStatusResponse.of(SuccessMessage.MYPAGE_GET_SUCCESS, myPageService.getMyPage(token)));
+    }
+
+    // 마이페이지 정보 수정
+    @PatchMapping("/userInfo")
+    public ResponseEntity<SuccessStatusResponse<Void>> FixMyPage(@RequestHeader("Authorization") String token, @RequestBody UserInfoRequestDto userInfoRequestDto) {
+        myPageService.fixMyPage(token, userInfoRequestDto);
+        return ResponseEntity.status(HttpStatus.CREATED).body(SuccessStatusResponse.of(SuccessMessage.INFO_UPDATE_SUCCESS));
     }
 }
