@@ -49,6 +49,7 @@ public class UserService {
                         .userSex(userCreateRequest.getSex())
                         .userImage(null)
                         .userType(null)
+                        .userlocation(null)
                         .build();
 
         return UserResponse.of(userRepository.save(user).getId());

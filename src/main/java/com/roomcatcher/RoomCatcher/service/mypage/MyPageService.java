@@ -1,9 +1,11 @@
 package com.roomcatcher.RoomCatcher.service.mypage;
 
 import com.roomcatcher.RoomCatcher.domain.Tag;
+import com.roomcatcher.RoomCatcher.domain.User;
 import com.roomcatcher.RoomCatcher.domain.UserTag;
 import com.roomcatcher.RoomCatcher.dto.mypage.request.UserTagRequestDto;
 import com.roomcatcher.RoomCatcher.dto.mypage.response.GetTagResponseDto;
+import com.roomcatcher.RoomCatcher.dto.mypage.response.MypageReponseDto;
 import com.roomcatcher.RoomCatcher.dto.mypage.response.UserTagResponseDto;
 import com.roomcatcher.RoomCatcher.global.jwt.JwtTokenProvider;
 import com.roomcatcher.RoomCatcher.repository.TagRepository;
@@ -97,6 +99,32 @@ public class MyPageService {
                                         .collect(Collectors.toList());
 
         return new UserTagResponseDto(UserTags);
+    }
+
+    // 마이페이지 조회
+    public MypageReponseDto getMyPage(String token) {
+        User user = userRepository.findByToken(token, jwtTokenProvider);
+
+        // 홀수면 남자, 짝수면 여자
+        String sex = (userRepository.findByToken(token, jwtTokenProvider).getUserSex() % 2 == 0) ? "여자" : "남자";
+
+        // 생년월일 변환 (예시) 030423 -> 03.04.23
+        String Birth = user.getUserBirth().substring(0, 2) + "." + user.getUserBirth().substring(2, 4) + "." + user.getUserBirth().substring(4);
+
+        // 선호 태그 조회
+        List<UserTag> userTags = userTagRepository.findByUser(userRepository.findByToken(token, jwtTokenProvider));
+        List<String> tagNames = userTags.stream()
+                                    .map(userTag -> userTag.getTag().getTagName())
+                                    .sorted(this::compareTags)
+                                    .collect(Collectors.toList());
+
+        return MypageReponseDto.of(
+            user.getUserName(),
+            Birth,
+            sex,
+            user.getUserlocation(),
+            tagNames
+        );
     }
 }
 

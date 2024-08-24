@@ -2,6 +2,7 @@ package com.roomcatcher.RoomCatcher.controller;
 
 import com.roomcatcher.RoomCatcher.dto.mypage.request.UserTagRequestDto;
 import com.roomcatcher.RoomCatcher.dto.mypage.response.GetTagResponseDto;
+import com.roomcatcher.RoomCatcher.dto.mypage.response.MypageReponseDto;
 import com.roomcatcher.RoomCatcher.dto.mypage.response.UserTagResponseDto;
 import com.roomcatcher.RoomCatcher.global.exception.dto.SuccessStatusResponse;
 import com.roomcatcher.RoomCatcher.global.exception.message.SuccessMessage;
@@ -28,5 +29,11 @@ public class MyPageController {
     @PostMapping("/userTags")
     public ResponseEntity<SuccessStatusResponse<UserTagResponseDto>> updateUserTags(@RequestHeader("Authorization") String token, @RequestBody UserTagRequestDto requestDto) {
         return ResponseEntity.status(HttpStatus.OK).body(SuccessStatusResponse.of(SuccessMessage.TAGS_UPDATE_SUCCESS, myPageService.updateUserTags(token, requestDto)));
+    }
+
+    // 마이페이지 조회
+    @GetMapping
+    public ResponseEntity<SuccessStatusResponse<MypageReponseDto>> getMyPage(@RequestHeader("Authorization") String token) {
+        return ResponseEntity.status(HttpStatus.OK).body(SuccessStatusResponse.of(SuccessMessage.MYPAGE_GET_SUCCESS, myPageService.getMyPage(token)));
     }
 }
