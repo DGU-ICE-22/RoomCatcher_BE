@@ -33,7 +33,7 @@ public class User {
     private String password;
 
     @Column(nullable = false)
-    private Integer userSex;
+    private String userSex;
 
     @Column
     private String userImage;
@@ -52,7 +52,7 @@ public class User {
     private UserType userType;
 
     @Builder
-    public User(String userName, String userBirth, String email, String password, Integer userSex, String userImage, UserType userType, String userlocation) {
+    public User(String userName, String userBirth, String email, String password, String userSex, String userImage, UserType userType, String userlocation) {
         this.userName = userName;
         this.userBirth = userBirth;
         this.email = email;
@@ -63,7 +63,7 @@ public class User {
         this.userlocation = userlocation;
     }
 
-    public static User of(String userName, String userBirth, String email, String password, Integer userSex, String userImage, UserType userType, String userLocation) {
+    public static User of(String userName, String userBirth, String email, String password, String userSex, String userImage, UserType userType, String userLocation) {
         return new User(userName, userBirth, email, password, userSex, userImage, userType, userLocation);
     }
 

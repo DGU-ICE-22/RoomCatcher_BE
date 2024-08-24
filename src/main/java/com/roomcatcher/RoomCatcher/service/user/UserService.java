@@ -40,13 +40,16 @@ public class UserService {
             throw new BusinessException(ErrorMessage.DUPLICATE_EMAIL);
         }
 
+        // 홀수면 남자, 짝수면 여자
+        String gender = (userCreateRequest.getSex() % 2 == 0) ? "여자" : "남자";
+
         // 유저 생성
         User user = User.builder()
                         .userName(userCreateRequest.getName())
                         .userBirth(userCreateRequest.getBirth())
                         .email(userCreateRequest.getEmail())
                         .password(passwordEncoder.encode(userCreateRequest.getPassword())) // 비밀번호를 암호화하여 저장
-                        .userSex(userCreateRequest.getSex())
+                        .userSex(gender)
                         .userImage(null)
                         .userType(null)
                         .userlocation(null)

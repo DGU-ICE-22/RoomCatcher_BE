@@ -105,9 +105,6 @@ public class MyPageService {
     public MypageReponseDto getMyPage(String token) {
         User user = userRepository.findByToken(token, jwtTokenProvider);
 
-        // 홀수면 남자, 짝수면 여자
-        String sex = (userRepository.findByToken(token, jwtTokenProvider).getUserSex() % 2 == 0) ? "여자" : "남자";
-
         // 생년월일 변환 (예시) 030423 -> 03.04.23
         String Birth = user.getUserBirth().substring(0, 2) + "." + user.getUserBirth().substring(2, 4) + "." + user.getUserBirth().substring(4);
 
@@ -121,7 +118,7 @@ public class MyPageService {
         return MypageReponseDto.of(
             user.getUserName(),
             Birth,
-            sex,
+            user.getUserSex(),
             user.getUserlocation(),
             tagNames
         );
