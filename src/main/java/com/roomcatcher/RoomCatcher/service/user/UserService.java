@@ -1,10 +1,10 @@
-package com.roomcatcher.RoomCatcher.service;
+package com.roomcatcher.RoomCatcher.service.user;
 
 import com.roomcatcher.RoomCatcher.domain.User;
-import com.roomcatcher.RoomCatcher.dto.request.UserCreateRequest;
-import com.roomcatcher.RoomCatcher.dto.request.UserLoginRequest;
-import com.roomcatcher.RoomCatcher.dto.response.UserLoginResponse;
-import com.roomcatcher.RoomCatcher.dto.response.UserResponse;
+import com.roomcatcher.RoomCatcher.dto.user.request.UserCreateRequest;
+import com.roomcatcher.RoomCatcher.dto.user.request.UserLoginRequest;
+import com.roomcatcher.RoomCatcher.dto.user.response.UserLoginResponse;
+import com.roomcatcher.RoomCatcher.dto.user.response.UserResponse;
 import com.roomcatcher.RoomCatcher.global.exception.BusinessException;
 import com.roomcatcher.RoomCatcher.global.exception.message.ErrorMessage;
 import com.roomcatcher.RoomCatcher.global.jwt.JwtTokenProvider;

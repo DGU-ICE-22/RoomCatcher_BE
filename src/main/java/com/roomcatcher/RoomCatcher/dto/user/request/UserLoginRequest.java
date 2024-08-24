@@ -1,4 +1,4 @@
-package com.roomcatcher.RoomCatcher.dto.request;
+package com.roomcatcher.RoomCatcher.dto.user.request;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;

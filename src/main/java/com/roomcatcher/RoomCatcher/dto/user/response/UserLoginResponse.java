@@ -1,4 +1,4 @@
-package com.roomcatcher.RoomCatcher.dto.response;
+package com.roomcatcher.RoomCatcher.dto.user.response;
 
 public record UserLoginResponse(
     String accessToken,

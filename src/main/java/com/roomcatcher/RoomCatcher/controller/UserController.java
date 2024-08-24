@@ -1,12 +1,12 @@
 package com.roomcatcher.RoomCatcher.controller;
 
-import com.roomcatcher.RoomCatcher.dto.request.UserCreateRequest;
-import com.roomcatcher.RoomCatcher.dto.request.UserLoginRequest;
-import com.roomcatcher.RoomCatcher.dto.response.UserLoginResponse;
-import com.roomcatcher.RoomCatcher.dto.response.UserResponse;
+import com.roomcatcher.RoomCatcher.dto.user.request.UserCreateRequest;
+import com.roomcatcher.RoomCatcher.dto.user.request.UserLoginRequest;
+import com.roomcatcher.RoomCatcher.dto.user.response.UserLoginResponse;
+import com.roomcatcher.RoomCatcher.dto.user.response.UserResponse;
 import com.roomcatcher.RoomCatcher.global.exception.dto.SuccessStatusResponse;
 import com.roomcatcher.RoomCatcher.global.exception.message.SuccessMessage;
-import com.roomcatcher.RoomCatcher.service.UserService;
+import com.roomcatcher.RoomCatcher.service.user.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
