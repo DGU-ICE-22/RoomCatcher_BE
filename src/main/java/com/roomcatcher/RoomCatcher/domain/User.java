@@ -33,10 +33,13 @@ public class User {
     private String password;
 
     @Column(nullable = false)
-    private Integer userSex;
+    private String userSex;
 
     @Column
     private String userImage;
+
+    @Column
+    private String userlocation;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<UserProduct> userProducts = new ArrayList<>();
@@ -49,7 +52,7 @@ public class User {
     private UserType userType;
 
     @Builder
-    public User(String userName, String userBirth, String email, String password, Integer userSex, String userImage, UserType userType) {
+    public User(String userName, String userBirth, String email, String password, String userSex, String userImage, UserType userType, String userlocation) {
         this.userName = userName;
         this.userBirth = userBirth;
         this.email = email;
@@ -57,10 +60,16 @@ public class User {
         this.userSex = userSex;
         this.userImage = userImage;
         this.userType = userType;
+        this.userlocation = userlocation;
     }
 
-    public static User of(String userName, String userBirth, String email, String password, Integer userSex, String userImage, UserType userType) {
-        return new User(userName, userBirth, email, password, userSex, userImage, userType);
+    public static User of(String userName, String userBirth, String email, String password, String userSex, String userImage, UserType userType, String userLocation) {
+        return new User(userName, userBirth, email, password, userSex, userImage, userType, userLocation);
     }
 
+    public void updateUserInfo(String birth, String sex, String residence) {
+        this.userBirth = birth;
+        this.userSex = sex;
+        this.userlocation = residence;
+    }
 }

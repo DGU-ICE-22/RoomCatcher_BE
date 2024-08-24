@@ -20,7 +20,7 @@ public class Tag {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
+    @Column(nullable = false, name = "tag_name")
     private String tagName;
 
     @Lob

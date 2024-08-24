@@ -6,5 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface UserTagRepository extends JpaRepository<UserTag, Long> {
-    List<UserTag> findByUserId(Long userId);
+
+    List<UserTag> findByUser(User user);
+    void deleteByUser(User user);
 }
