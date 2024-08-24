@@ -16,7 +16,7 @@ public class UserTag {
     @Id
     @Column(name = "user_tag_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long Id;
+    private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @OnDelete(action = OnDeleteAction.CASCADE)
@@ -27,4 +27,9 @@ public class UserTag {
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "tag_id", referencedColumnName = "id")
     private Tag tag;
+
+    public UserTag(User user, Tag tag) {
+        this.user = user;
+        this.tag = tag;
+    }
 }
