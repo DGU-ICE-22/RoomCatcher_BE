@@ -21,7 +21,7 @@ public class ProductTag {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @JoinColumn(name = "product_id")
+    @JoinColumn(name = "product_detail_id", referencedColumnName = "id")
     private Product product;
 
     @Column(name = "listing_serial_number")
@@ -29,6 +29,6 @@ public class ProductTag {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @JoinColumn(name = "tagId_id")          //나중에 테이블에서 tagId로 바꾸기
+    @JoinColumn(name = "tag_id", referencedColumnName = "id")
     private Tag tag;
 }
