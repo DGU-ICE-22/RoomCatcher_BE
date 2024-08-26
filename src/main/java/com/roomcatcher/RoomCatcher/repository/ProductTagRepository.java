@@ -9,4 +9,6 @@ import java.util.Optional;
 public interface ProductTagRepository extends JpaRepository<ProductTag, Long> {
 
     List<ProductTag> findByTagIdIn(List<Long> tagIds);
+
+    List<ProductTag> findAllByProductId(Long productId);
 }
