@@ -10,5 +10,5 @@ import java.util.List;
 @Setter
 public class CreateUserTypeDTO {
     private String typeName;
-    private List<Tag> tags;
+    private List<String> tags;
 }
