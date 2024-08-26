@@ -16,7 +16,8 @@ public enum ErrorMessage {
     ALREADY_LOGOUT_TOKEN(HttpStatus.UNAUTHORIZED.value(), "이미 로그아웃된 토큰입니다."),
     DEACTIVATED_ACCOUNT(HttpStatus.FORBIDDEN.value(), "탈퇴된 계정입니다."),
     NOT_FOUND_TYPE(HttpStatus.NOT_FOUND.value(), "해당하는 타입이 없습니다."),
-    CREATE_USER_TYPE_FAIL(HttpStatus.BAD_REQUEST.value(), "사용자 유형 생성에 실패하였습니다."),;
+    CREATE_USER_TYPE_FAIL(HttpStatus.BAD_REQUEST.value(), "사용자 유형 생성에 실패하였습니다."),
+    NOT_FOUND_TAG(HttpStatus.NOT_FOUND.value(), "해당하는 태그가 없습니다.");
     private final int code;
     private final String message;
 }
