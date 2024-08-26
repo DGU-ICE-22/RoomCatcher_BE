@@ -1,17 +1,14 @@
 package com.roomcatcher.RoomCatcher.service.mypage;
 
-import com.roomcatcher.RoomCatcher.domain.Tag;
-import com.roomcatcher.RoomCatcher.domain.User;
-import com.roomcatcher.RoomCatcher.domain.UserTag;
+import com.roomcatcher.RoomCatcher.domain.*;
 import com.roomcatcher.RoomCatcher.dto.mypage.request.UserInfoRequestDto;
 import com.roomcatcher.RoomCatcher.dto.mypage.request.UserTagRequestDto;
 import com.roomcatcher.RoomCatcher.dto.mypage.response.GetTagResponseDto;
 import com.roomcatcher.RoomCatcher.dto.mypage.response.MypageReponseDto;
+import com.roomcatcher.RoomCatcher.dto.mypage.response.UserProductResponseDto;
 import com.roomcatcher.RoomCatcher.dto.mypage.response.UserTagResponseDto;
 import com.roomcatcher.RoomCatcher.global.jwt.JwtTokenProvider;
-import com.roomcatcher.RoomCatcher.repository.TagRepository;
-import com.roomcatcher.RoomCatcher.repository.UserRepository;
-import com.roomcatcher.RoomCatcher.repository.UserTagRepository;
+import com.roomcatcher.RoomCatcher.repository.*;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -29,6 +26,8 @@ public class MyPageService {
     private final TagRepository tagRepository;
     private final UserRepository userRepository;
     private final JwtTokenProvider jwtTokenProvider;
+    private final ProductTagRepository productTagRepository;
+    private final UserProductRepository userProductRepository;
 
     // 해시태그 목록 조회
     public GetTagResponseDto getTags() {
@@ -133,6 +132,30 @@ public class MyPageService {
         user.updateUserInfo(userInfoRequestDto.getBirth(), userInfoRequestDto.getSex(), userInfoRequestDto.getResidence());
 
         userRepository.save(user);
+    }
+
+    // 마이페이지 찜한 매물 리스트 조회
+    public List<UserProductResponseDto> getLikedProducts(String token) {
+        User user = userRepository.findByToken(token, jwtTokenProvider);
+
+        List<UserProduct> userProducts = userProductRepository.findAllByUserId(user.getId());
+
+        return userProducts.stream().map(userProduct -> {
+            Product product = userProduct.getProduct();
+            List<String> tags = productTagRepository.findAllByProductId(product.getId())
+                                    .stream()
+                                    .map(tag -> tag.getTag().getTagName())
+                                    .collect(Collectors.toList());
+
+            return UserProductResponseDto.builder()
+                       .id(product.getId())
+                       .productName(product.get매물명())
+                       .address(product.get매물도로기본주소())
+                       .typeOfProperty(product.get카테고리2())
+                       .monthlyRent(product.get월세가())
+                       .tags(tags)
+                       .build();
+        }).collect(Collectors.toList());
     }
 }
 

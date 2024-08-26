@@ -4,6 +4,7 @@ import com.roomcatcher.RoomCatcher.dto.mypage.request.UserInfoRequestDto;
 import com.roomcatcher.RoomCatcher.dto.mypage.request.UserTagRequestDto;
 import com.roomcatcher.RoomCatcher.dto.mypage.response.GetTagResponseDto;
 import com.roomcatcher.RoomCatcher.dto.mypage.response.MypageReponseDto;
+import com.roomcatcher.RoomCatcher.dto.mypage.response.UserProductResponseDto;
 import com.roomcatcher.RoomCatcher.dto.mypage.response.UserTagResponseDto;
 import com.roomcatcher.RoomCatcher.global.exception.dto.SuccessStatusResponse;
 import com.roomcatcher.RoomCatcher.global.exception.message.SuccessMessage;
@@ -12,6 +13,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/mypage")
@@ -43,5 +46,10 @@ public class MyPageController {
     public ResponseEntity<SuccessStatusResponse<Void>> FixMyPage(@RequestHeader("Authorization") String token, @RequestBody UserInfoRequestDto userInfoRequestDto) {
         myPageService.fixMyPage(token, userInfoRequestDto);
         return ResponseEntity.status(HttpStatus.CREATED).body(SuccessStatusResponse.of(SuccessMessage.INFO_UPDATE_SUCCESS));
+    }
+
+    @GetMapping("/userProducts")
+    public ResponseEntity<SuccessStatusResponse<List<UserProductResponseDto>>> getLikedProducts(@RequestHeader("Authorization") String token) {
+        return ResponseEntity.status(HttpStatus.OK).body(SuccessStatusResponse.of(SuccessMessage.LIKED_PRODUCT_GET_SUCCESS, myPageService.getLikedProducts(token)));
     }
 }
