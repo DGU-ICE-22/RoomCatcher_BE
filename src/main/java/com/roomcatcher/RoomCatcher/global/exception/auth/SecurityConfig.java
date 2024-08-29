@@ -11,6 +11,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.filter.CorsFilter;
 
 @Configuration
 @EnableWebSecurity
@@ -21,11 +24,16 @@ public class SecurityConfig {
     private final CustomJwtAuthenticationEntryPoint customJwtAuthenticationEntryPoint;
     private final CustomAccessDeniedHandler customAccessDeniedHandler;
 
-    private static final String[] AUTH_WHITE_LIST = {"/api/register", "/api/login", "/api/mypage/*" }; // 화이트 리스트 경로를 추가하여 이 경로는 인증 없이 접근 가능
+    private static final String[] AUTH_WHITE_LIST = {
+        "/api/register",
+        "/api/login",
+        "/api/mypage/*"
+    }; // 화이트 리스트 경로를 추가하여 이 경로는 인증 없이 접근 가능
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
+            .cors().and()  // CORS 설정 추가
             .csrf(AbstractHttpConfigurer::disable)
             .formLogin(AbstractHttpConfigurer::disable)
             .requestCache(RequestCacheConfigurer::disable)
@@ -43,9 +51,22 @@ public class SecurityConfig {
                 // 즉, 유저 회원 가입이나 로그인 등 인증 전 단계의 API를 WHITE_LIST에 등록한 후 그 요청의 경우 허용, 나머지는 인증을 진행
             })
             .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
-            // 이렇게 필터를 추가하면 이미 SecurityContextHolder에 저장된 유저 정보로 이후 인증 필터에서 인증과정은 통과
+        // 이렇게 필터를 추가하면 이미 SecurityContextHolder에 저장된 유저 정보로 이후 인증 필터에서 인증과정은 통과
 
         return http.build();
+    }
+
+    @Bean
+    public CorsFilter corsFilter() {
+        CorsConfiguration corsConfiguration = new CorsConfiguration();
+        corsConfiguration.addAllowedOrigin("*"); // 허용할 클라이언트 도메인
+        corsConfiguration.addAllowedMethod("*"); // 모든 HTTP 메서드 허용
+        corsConfiguration.addAllowedHeader("*"); // 모든 헤더 허용
+        corsConfiguration.setAllowCredentials(true); // 자격 증명 허용
+
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", corsConfiguration); // 모든 경로에 대해 CORS 설정 적용
+        return new CorsFilter(source);
     }
 
     @Bean
