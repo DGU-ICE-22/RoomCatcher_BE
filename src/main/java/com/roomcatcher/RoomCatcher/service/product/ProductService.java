@@ -15,6 +15,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -33,20 +34,32 @@ public class ProductService {
         try {
             //토큰으로 userId를 가져옴.
             Long userId = jwtTokenProvider.getUserFromJwt(token);
-            //userId로 userTag를 가져옴.
+            // userId로 userTag를 가져옴.
             List<Long> tagIds = userTagRepository.findByUserId(userId)
                     .stream()
                     .map(userTag -> userTag.getTag().getId())
                     .toList();
             log.info("tagIds: {}", tagIds);
-            //그 tagId로 productTagRepository에서 productTag를 가져옴.
+
+// 그 tagId로 productTagRepository에서 productTag를 가져옴.
             List<ProductTag> productTags = productTagRepository.findByTagIdIn(tagIds);
-            // 그 productTag에서 또 productId를 가져옴.
-            List<Long> productIds = productTags.stream()
-                    .map(productTag -> productTag.getProduct().getId())
+
+// productId별로 매칭되는 tagId 개수를 계산함.
+            Map<Long, Long> productTagCountMap = productTags.stream()
+                    .collect(Collectors.groupingBy(
+                            productTag -> productTag.getProduct().getId(),
+                            Collectors.counting()
+                    ));
+
+// 겹치는 태그 개수가 많은 순서대로 productId를 리스트화
+            List<Long> sortedProductIds = productTagCountMap.entrySet().stream()
+                    .filter(entry -> entry.getValue() >= 2)  // 2개 이상의 태그가 일치하는 것만 필터링
+                    .sorted((entry1, entry2) -> Long.compare(entry2.getValue(), entry1.getValue()))  // 개수 기준으로 내림차순 정렬
+                    .map(Map.Entry::getKey)
                     .toList();
 
-            List<Product> productList = productRepository.findByIdIn(productIds);
+            log.info("Sorted productIds by matching tag count: {}", sortedProductIds);
+            List<Product> productList = productRepository.findByIdIn(sortedProductIds);
 
             List<ProductResponseDTO> productResponseDTOList = productList.stream()
                     .map(ProductResponseDTO::of)

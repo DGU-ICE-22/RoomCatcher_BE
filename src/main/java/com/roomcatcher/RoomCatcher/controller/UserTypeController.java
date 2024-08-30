@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 public class UserTypeController {
     private final UserTypeService userTypeService;
     @PostMapping
+    @CrossOrigin(origins = "http://localhost:3000") // 특정 컨트롤러에 CORS 설정
     public ResponseEntity<?> createUserType(@RequestHeader("Authorization") String token, @RequestBody CreateUserTypeDTO createUserTypeDTO){
         return ResponseEntity.status(HttpStatus.CREATED).body(SuccessStatusResponse.of(SuccessMessage.CREATE_USER_TYPE, userTypeService.createUserType(token, createUserTypeDTO)));
     }
