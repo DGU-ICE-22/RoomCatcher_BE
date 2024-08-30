@@ -53,13 +53,14 @@ public class ProductService {
 
 // 겹치는 태그 개수가 많은 순서대로 productId를 리스트화
             List<Long> sortedProductIds = productTagCountMap.entrySet().stream()
-                    .filter(entry -> entry.getValue() >= 2)  // 2개 이상의 태그가 일치하는 것만 필터링
+                    .filter(entry -> entry.getValue() >= 5)  // 2개 이상의 태그가 일치하는 것만 필터링
                     .sorted((entry1, entry2) -> Long.compare(entry2.getValue(), entry1.getValue()))  // 개수 기준으로 내림차순 정렬
                     .map(Map.Entry::getKey)
                     .toList();
+            List<Long> limitedProductIds = sortedProductIds.size() > 10 ? sortedProductIds.subList(0, 10) : sortedProductIds;
 
-            log.info("Sorted productIds by matching tag count: {}", sortedProductIds);
-            List<Product> productList = productRepository.findByIdIn(sortedProductIds);
+            log.info("Sorted productIds by matching tag count: {}", limitedProductIds);
+            List<Product> productList = productRepository.findByIdIn(limitedProductIds);
 
             List<ProductResponseDTO> productResponseDTOList = productList.stream()
                     .map(ProductResponseDTO::of)
