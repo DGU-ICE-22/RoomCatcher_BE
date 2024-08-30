@@ -73,7 +73,7 @@ public class UserService {
             UserAuthentication.createUserAuthentication(user.getId())
         );
 
-        return UserLoginResponse.of(accessToken, String.valueOf(user.getId()));
+        return UserLoginResponse.of(accessToken, String.valueOf(user.getId()), String.valueOf(user.getUserName()));
     }
 
     @Transactional
