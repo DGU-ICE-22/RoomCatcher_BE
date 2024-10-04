@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Getter
-@Setter
 @Entity
 @Table(name = "data_analyze_product_kb_detail", schema = "RoomCatcherDB")
 public class Product {

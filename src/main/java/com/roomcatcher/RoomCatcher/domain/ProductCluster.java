@@ -5,7 +5,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Getter
-@Setter
 @Entity
 @Table(name = "`data_analyze_product_kb`", schema = "RoomCatcherDB")
 public class ProductCluster {
