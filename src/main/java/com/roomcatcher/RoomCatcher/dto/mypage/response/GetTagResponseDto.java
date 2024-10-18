@@ -7,13 +7,10 @@ import lombok.NoArgsConstructor;
 
 import java.util.List;
 
-@Getter
-@NoArgsConstructor
-@AllArgsConstructor
 @Builder
-public class GetTagResponseDto {
-    private List<String> tagName;
-
+public record GetTagResponseDto (
+    List<String> tagName
+){
     public static GetTagResponseDto of(List<String> tagName) {
         return new GetTagResponseDto(tagName);
     }

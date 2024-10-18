@@ -7,22 +7,19 @@ import lombok.NoArgsConstructor;
 
 import java.util.List;
 
-@Getter
-@NoArgsConstructor
-@AllArgsConstructor
 @Builder
-public class MypageReponseDto {
+public record MypageReponseDto (
 
-    private String name;
+    String name,
 
-    private String birth;
+    String birth,
 
-    private String sex;
+    String sex,
 
-    private String residence;
+    String residence,
 
-    private List<String> myTags;
-
+    List<String> myTags
+){
     public static MypageReponseDto of(String name, String birth, String sex, String residence, List<String> myTags) {
         return MypageReponseDto.builder()
                    .name(name)
