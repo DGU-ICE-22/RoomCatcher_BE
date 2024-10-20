@@ -6,9 +6,7 @@ import lombok.NoArgsConstructor;
 
 import java.util.List;
 
-@Getter
-@NoArgsConstructor
-@AllArgsConstructor
-public class UserTagResponseDto {
-    private List<String> userTags;
+public record UserTagResponseDto (
+    List<String> userTags
+){
 }
