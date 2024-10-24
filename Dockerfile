@@ -20,5 +20,5 @@ RUN ./gradlew --no-daemon clean build -x test
 # 실행 스테이지
 FROM openjdk:17-jdk-slim
 COPY --from=builder /app/build/libs/*.jar /app/app.jar
-ENTRYPOINT ["java"]
+ENTRYPOINT ["java", "-Dspring.profiles.active=docker"]
 CMD ["-jar", "/app/app.jar"]
