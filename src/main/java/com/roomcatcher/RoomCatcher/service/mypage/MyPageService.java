@@ -85,7 +85,7 @@ public class MyPageService {
         userTagRepository.deleteByUser(userRepository.findByToken(token, jwtTokenProvider));
 
         // 새로운 태그 저장
-        List<Tag> tags = tagRepository.findByTagNameIn(requestDto.getTagNames());
+        List<Tag> tags = tagRepository.findByTagNameIn(requestDto.tagNames());
 
         List<UserTag> userTags = tags.stream()
                                      .map(tag -> new UserTag(userRepository.findByToken(token, jwtTokenProvider), tag))
@@ -129,7 +129,7 @@ public class MyPageService {
     public void fixMyPage(String token, UserInfoRequestDto userInfoRequestDto) {
         User user = userRepository.findByToken(token, jwtTokenProvider);
 
-        user.updateUserInfo(userInfoRequestDto.getBirth(), userInfoRequestDto.getSex(), userInfoRequestDto.getResidence());
+        user.updateUserInfo(userInfoRequestDto.birth(), userInfoRequestDto.sex(), userInfoRequestDto.residence());
 
         userRepository.save(user);
     }
