@@ -35,6 +35,9 @@ out/
 
 ### VS Code ###
 .vscode/
-src/main/resources/application.yml
+
+### Important ###
+src/main/resources/*
+src/test/resources/*
 build.gradle
 docker-compose.yml
